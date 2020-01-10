@@ -49,7 +49,7 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="fname" style="color:white">Número</label>
-                        <input id="numero" type="number" step="0.01" class="form-control" id="fname" name="fname">
+                        <input id="numero" type="text" class="form-control" id="fname" name="fname">
                       </div>
                     </div>
                   </div>
@@ -162,27 +162,49 @@
       }
 
       function suma(){
-        n1 = n1 + parseInt($("#numero").val());
-        n2 = n2 + parseInt($("#numero").val());
+        if(!isNaN($("#numero").val())){
+          n1 = n1 + parseInt($("#numero").val());
+          n2 = n2 + parseInt($("#numero").val());
+        }else if($("#numero").val() == "x"){
+          m1 = m1 + 1
+          m2 = m2 + 1
+        }else{
+          window.alert("Valor invàlid!");
+        }
         mostraEquacio();
       }
       function resta(){
-        n1 = n1 - parseInt($("#numero").val());
-        n2 = n2 - parseInt($("#numero").val());
+        if(!isNaN($("#numero").val())){
+          n1 = n1 - parseInt($("#numero").val());
+          n2 = n2 - parseInt($("#numero").val());
+        }else if($("#numero").val() == "x"){
+          m1 = m1 - 1
+          m2 = m2 - 1
+        }else{
+          window.alert("Valor invàlid!");
+        }
         mostraEquacio();
       }
       function divisio(){
-        n1 = n1 / parseInt($("#numero").val());
-        n2 = n2 / parseInt($("#numero").val());
-        m1 = m1 / parseInt($("#numero").val());
-        m2 = m2 / parseInt($("#numero").val());
+        if(!isNaN($("#numero").val())){
+          n1 = n1 / parseInt($("#numero").val());
+          n2 = n2 / parseInt($("#numero").val());
+          m1 = m1 / parseInt($("#numero").val());
+          m2 = m2 / parseInt($("#numero").val());
+        }else{
+          window.alert("Valor invàlid!");
+        }
         mostraEquacio();
       }
       function multiplicacio(){
-        n1 = n1 * parseInt($("#numero").val());
-        n2 = n2 * parseInt($("#numero").val());
-        m1 = m1 * parseInt($("#numero").val());
-        m2 = m2 * parseInt($("#numero").val());
+        if(!isNaN($("#numero").val())){
+          n1 = n1 * parseInt($("#numero").val());
+          n2 = n2 * parseInt($("#numero").val());
+          m1 = m1 * parseInt($("#numero").val());
+          m2 = m2 * parseInt($("#numero").val());
+        }else{
+          window.alert("Valor invàlid!");
+        }
         mostraEquacio();
       }
     </script>
