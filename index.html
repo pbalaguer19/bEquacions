@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Unlock - Free Bootstrap 4 Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Free HTML5 Website Template by uicookies.com" />
+    <meta name="keywords" content="free bootstrap 4, free bootstrap 4 template, free website templates, free html5, free template, free website template, html5, css3, mobile first, responsive" />
+    <meta name="author" content="uicookies.com" />
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Balança d'Equacions</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="probootstrap-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link">Creat per Pau Balaguer</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+
+
+    <section class="probootstrap-cover">
+      <div class="container">
+        <div class="row probootstrap-vh-100 align-items-center text-center">
+          <div class="col-sm">
+            <div class="probootstrap-text">
+              <h1 class="probootstrap-heading text-white mb-4">Balança</h1>
+              <div class="probootstrap-subheading mb-5">
+                <p class="h4 font-weight-normal">Explicació</p>
+              </div>
+              <div class="col-md-12">
+                <form action="#" method="post" class="probootstrap-form mb-5">
+                  <div class="row justify-content-center align-items-center">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="fname" style="color:white">Número</label>
+                        <input id="numero" type="number" class="form-control" id="fname" name="fname">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <p>
+                <a href="#" onclick="suma();" class="btn btn-primary btn-outline-white mr-2 mb-2">+</a>
+                <a href="#" onclick="resta();" class="btn btn-primary btn-outline-white mb-2">-</a>
+                <a href="#" onclick="divisio();" class="btn btn-primary btn-outline-white mr-2 mb-2">%</a>
+                <a href="#" onclick="multiplicacio();" class="btn btn-primary btn-outline-white mb-2">x</a>
+              </p>
+              <div id="equacio" class="col-md-12" style="color:white; text-transform: lowercase;">
+                2x + 3 = 10
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="probootstrap-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md text-md-right text-left">
+            <p><small>&copy; Unlock 2017. All Rights Reserved. <br> Made with <span class="icon-heart"></span> by <a href="https://uicookies.com/">uiCookies</a> Demo Images: Unsplash</small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script type="text/javascript">
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+      }
+
+      m1 = getRndInteger(0, 10);
+      n1 = getRndInteger(0, 10);
+      m2 = getRndInteger(0, 10);
+      n2 = getRndInteger(0, 10);
+
+      mostraEquacio();
+
+      function mostraEquacio(){
+        // M1
+        if(m1 == 1){
+          eq = "x";
+        }else{
+          if(m1 == 0){
+            eq = "";
+          }else{
+            if(m1 == -1){
+              eq = "-x";
+            }else{
+              eq = m1 + "x";
+            }
+          }
+        }
+
+        // N1
+        if(n1 == 0 && m1 != 0){
+          eq = eq + " = ";
+        }else{
+          if(m1 != 0){
+            eq = eq + " + " + n1 + " = ";
+          }else{
+            eq = eq + n1 + " = ";
+          }
+        }
+
+        // M2
+        if(m2 > 1){
+          eq = eq + m2 + "x";
+        }else{
+          if(m2 == 0){
+            eq = eq + "";
+          }else{
+            if(m2 == -1){
+              eq = eq + "-x";
+            }else{
+              eq = eq + "x";
+            }
+          }
+        }
+
+        // N2
+        if(n2 != 0){
+          if(m2 != 0){
+            eq = eq + " + " + n2;
+          }else{
+            eq = eq + n2;
+          }
+        }else{
+          if(m2 == 0){
+            eq = eq + "0"
+          }
+        }
+
+        $("#equacio").text(eq)
+      }
+
+      function suma(){
+        n1 = n1 + parseInt($("#numero").val());
+        n2 = n2 + parseInt($("#numero").val());
+        mostraEquacio();
+      }
+      function resta(){
+        n1 = n1 - parseInt($("#numero").val());
+        n2 = n2 - parseInt($("#numero").val());
+        mostraEquacio();
+      }
+      function divisio(){
+        n1 = n1 % parseInt($("#numero").val());
+        n2 = n2 % parseInt($("#numero").val());
+        m1 = m1 - parseInt($("#numero").val());
+        m2 = m2 - parseInt($("#numero").val());
+        mostraEquacio();
+      }
+      function multiplicacio(){
+        n1 = n1 * parseInt($("#numero").val());
+        n2 = n2 * parseInt($("#numero").val());
+        m1 = m1 + parseInt($("#numero").val());
+        m2 = m2 + parseInt($("#numero").val());
+        mostraEquacio();
+      }
+    </script>
+  </body>
+</html>
