@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Unlock - Free Bootstrap 4 Template</title>
+    <title>Balança d'Equacions de primer grau</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Free HTML5 Website Template by uicookies.com" />
@@ -49,7 +49,7 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="fname" style="color:white">Número</label>
-                        <input id="numero" type="number" class="form-control" id="fname" name="fname">
+                        <input id="numero" type="number" step="0.01" class="form-control" id="fname" name="fname">
                       </div>
                     </div>
                   </div>
@@ -100,6 +100,10 @@
       mostraEquacio();
 
       function mostraEquacio(){
+        if(n1 % 1 != 0) n1 = n1.toFixed(2)
+        if(m1 % 1 != 0) m1 = m1.toFixed(2)
+        if(n2 % 1 != 0) n2 = n2.toFixed(2)
+        if(m2 % 1 != 0) m2 = m2.toFixed(2)
         // M1
         if(m1 == 1){
           eq = "x";
@@ -168,17 +172,17 @@
         mostraEquacio();
       }
       function divisio(){
-        n1 = n1 % parseInt($("#numero").val());
-        n2 = n2 % parseInt($("#numero").val());
-        m1 = m1 - parseInt($("#numero").val());
-        m2 = m2 - parseInt($("#numero").val());
+        n1 = n1 / parseInt($("#numero").val());
+        n2 = n2 / parseInt($("#numero").val());
+        m1 = m1 / parseInt($("#numero").val());
+        m2 = m2 / parseInt($("#numero").val());
         mostraEquacio();
       }
       function multiplicacio(){
         n1 = n1 * parseInt($("#numero").val());
         n2 = n2 * parseInt($("#numero").val());
-        m1 = m1 + parseInt($("#numero").val());
-        m2 = m2 + parseInt($("#numero").val());
+        m1 = m1 * parseInt($("#numero").val());
+        m2 = m2 * parseInt($("#numero").val());
         mostraEquacio();
       }
     </script>
