@@ -39,12 +39,9 @@
         <div class="row probootstrap-vh-100 align-items-center text-center">
           <div class="col-sm">
             <div class="probootstrap-text">
-              <h1 class="probootstrap-heading text-white mb-4">Balança</h1>
-              <div class="probootstrap-subheading mb-5">
-                <p class="h4 font-weight-normal">Explicació</p>
-              </div>
+              <h2 class="text-white mb-5">Balança d'equacions de primer grau</h2>
               <div class="col-md-12">
-                <form action="#" method="post" class="probootstrap-form mb-5">
+                <form action="#" method="post" class="probootstrap-form mb-2">
                   <div class="row justify-content-center align-items-center">
                     <div class="col-md-2">
                       <div class="form-group">
@@ -52,19 +49,26 @@
                         <input id="numero" type="text" class="form-control" id="fname" name="fname">
                       </div>
                     </div>
+                    <div class="col-md-4">
+                      <div class="form-group justify-content-center align-self-center">
+                        <label for="" style="color:white">Operacions</label>
+                        <br/>
+                        <a href="#" onclick="suma();" class="btn btn-primary btn-outline-white mb-2">+</a>
+                        <a href="#" onclick="resta();" class="btn btn-primary btn-outline-white mb-2">-</a>
+                        <a href="#" onclick="divisio();" class="btn btn-primary btn-outline-white mb-2">%</a>
+                        <a href="#" onclick="multiplicacio();" class="btn btn-primary btn-outline-white mb-2">x</a>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>
-              <p>
-                <a href="#" onclick="suma();" class="btn btn-primary btn-outline-white mr-2 mb-2">+</a>
-                <a href="#" onclick="resta();" class="btn btn-primary btn-outline-white mb-2">-</a>
-                <a href="#" onclick="divisio();" class="btn btn-primary btn-outline-white mr-2 mb-2">%</a>
-                <a href="#" onclick="multiplicacio();" class="btn btn-primary btn-outline-white mb-2">x</a>
-              </p>
-              <div id="equacio" class="col-md-12" style="color:white; text-transform: lowercase;">
+              <div id="equacio" style="color:white; text-transform: lowercase;">
                 2x + 3 = 10
               </div>
-
+              <div class="col-md-12 mt-5">
+                <a href="#" onclick="passos();" class="btn btn-primary mr-4 mb-2">Veure passos</a>
+                <a href="#" onclick="reinicia();" class="btn btn-outline-warning  mr-4 mb-2">Reiniciar</a>
+              </div>
             </div>
           </div>
         </div>
@@ -96,6 +100,9 @@
       n1 = getRndInteger(0, 10);
       m2 = getRndInteger(0, 10);
       n2 = getRndInteger(0, 10);
+
+      equacions = [];
+      operacions = [];
 
       mostraEquacio();
 
@@ -158,16 +165,32 @@
           }
         }
 
+        equacions.push(eq);
         $("#equacio").text(eq)
+        $("#numero").val("");
+        checkIfResult();
       }
 
       function suma(){
         if(!isNaN($("#numero").val())){
-          n1 = n1 + parseInt($("#numero").val());
-          n2 = n2 + parseInt($("#numero").val());
-        }else if($("#numero").val() == "x"){
-          m1 = m1 + 1
-          m2 = m2 + 1
+          n1 = n1 + parseFloat($("#numero").val());
+          n2 = n2 + parseFloat($("#numero").val());
+          operacions.push("+" + $("#numero").val());
+        }else if($("#numero").val().toLowerCase().includes("x")){
+          if($("#numero").val().toLowerCase() == "x"){
+            m1 = m1 + 1;
+            m2 = m2 + 1;
+            operacions.push("+" + $("#numero").val());
+          }else{
+            number = $("#numero").val().substring(0,$("#numero").val().length-1);
+            if(!isNaN(number)){
+              m1 = m1 + parseFloat(number);
+              m2 = m2 + parseFloat(number);
+              operacions.push("+" + $("#numero").val());
+            }else{
+              window.alert("Valor invàlid!");
+            }
+          }
         }else{
           window.alert("Valor invàlid!");
         }
@@ -175,11 +198,24 @@
       }
       function resta(){
         if(!isNaN($("#numero").val())){
-          n1 = n1 - parseInt($("#numero").val());
-          n2 = n2 - parseInt($("#numero").val());
-        }else if($("#numero").val() == "x"){
-          m1 = m1 - 1
-          m2 = m2 - 1
+          n1 = n1 - parseFloat($("#numero").val());
+          n2 = n2 - parseFloat($("#numero").val());
+          operacions.push("-" + $("#numero").val());
+        }else if($("#numero").val().toLowerCase().includes("x")){
+          if($("#numero").val().toLowerCase() == "x"){
+            m1 = m1 - 1;
+            m2 = m2 - 1;
+            operacions.push("-" + $("#numero").val());
+          }else{
+            number = $("#numero").val().substring(0,$("#numero").val().length-1);
+            if(!isNaN(number)){
+              m1 = m1 - parseFloat(number);
+              m2 = m2 - parseFloat(number);
+              operacions.push("-" + $("#numero").val());
+            }else{
+              window.alert("Valor invàlid!");
+            }
+          }
         }else{
           window.alert("Valor invàlid!");
         }
@@ -187,10 +223,11 @@
       }
       function divisio(){
         if(!isNaN($("#numero").val())){
-          n1 = n1 / parseInt($("#numero").val());
-          n2 = n2 / parseInt($("#numero").val());
-          m1 = m1 / parseInt($("#numero").val());
-          m2 = m2 / parseInt($("#numero").val());
+          n1 = n1 / parseFloat($("#numero").val());
+          n2 = n2 / parseFloat($("#numero").val());
+          m1 = m1 / parseFloat($("#numero").val());
+          m2 = m2 / parseFloat($("#numero").val());
+          operacions.push("%" + $("#numero").val());
         }else{
           window.alert("Valor invàlid!");
         }
@@ -198,14 +235,38 @@
       }
       function multiplicacio(){
         if(!isNaN($("#numero").val())){
-          n1 = n1 * parseInt($("#numero").val());
-          n2 = n2 * parseInt($("#numero").val());
-          m1 = m1 * parseInt($("#numero").val());
-          m2 = m2 * parseInt($("#numero").val());
+          n1 = n1 * parseFloat($("#numero").val());
+          n2 = n2 * parseFloat($("#numero").val());
+          m1 = m1 * parseFloat($("#numero").val());
+          m2 = m2 * parseFloat($("#numero").val());
+          operacions.push("*" + $("#numero").val());
         }else{
           window.alert("Valor invàlid!");
         }
         mostraEquacio();
+      }
+
+      function checkIfResult(){
+        if(m1 == 1 && n1 == 0 && m2 == 0){
+          window.alert("El valor de x és: " + n2);
+        }
+
+        if(m2 == 1 && n2 == 0 && m1 == 0){
+          window.alert("El valor de x és: " + n1);
+        }
+      }
+
+      function passos(){
+        llistaPassos = ""
+        for(var i = 0; i<equacions.length; i++){
+          if(i>0) llistaPassos += "[" + operacions[i-1] + "]\n" + equacions[i] + "\n";
+          else llistaPassos += equacions[i] + "\n";
+        }
+        window.alert(llistaPassos);
+      }
+
+      function reinicia(){
+        location.reload();
       }
     </script>
   </body>
