@@ -65,9 +65,17 @@
               <div id="equacio" style="color:white; text-transform: lowercase;">
                 2x + 3 = 10
               </div>
-              <div class="col-md-12 mt-5">
-                <a href="#" onclick="passos();" class="btn btn-primary mr-4 mb-2">Veure passos</a>
-                <a href="#" onclick="reinicia();" class="btn btn-outline-warning  mr-4 mb-2">Reiniciar</a>
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="mynetwork1"></div>
+                </div>
+                <div class="col-md-6">
+                  <div id="mynetwork2"></div>
+                </div>
+                <div class="col-md-12 mt-5">
+                  <a href="#" onclick="passos();" class="btn btn-primary mr-4 mb-2">Veure passos</a>
+                  <a href="#" onclick="reinicia();" class="btn btn-outline-warning  mr-4 mb-2">Reiniciar</a>
+                </div>
               </div>
             </div>
           </div>
@@ -90,6 +98,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 
     <script type="text/javascript">
       function getRndInteger(min, max) {
@@ -168,6 +177,7 @@
         equacions.push(eq);
         $("#equacio").text(eq)
         $("#numero").val("");
+        dibuixa();
         checkIfResult();
       }
 
@@ -267,6 +277,63 @@
 
       function reinicia(){
         location.reload();
+      }
+
+      function dibuixa(){
+        tmp = [];
+        for(var i=0; i<m1; i++){
+          tmp.push({ id: i, label: "x", shape: "box", color: "#97C2FC", x:0, y:35*i })
+        }
+        for(var i=0; i<n1; i++){
+          tmp.push({ id: m1+i, label: "1", shape: "ellipse", color: "#6E6EFD", x:50, y:35*i })
+        }
+
+        var nodes1 = new vis.DataSet(tmp);
+
+        var container1 = document.getElementById("mynetwork1");
+        var data1 = {
+          nodes: nodes1,
+        };
+
+        tmp2 = [];
+        for(var i=0; i<m2; i++){
+          tmp2.push({ id: i, label: "x", shape: "box", color: "#97C2FC", x:0, y:35*i})
+        }
+        for(var i=0; i<n2; i++){
+          tmp2.push({ id: m2+i, label: "1", shape: "ellipse", color: "#6E6EFD", x:50, y:35*i})
+        }
+
+        var nodes2 = new vis.DataSet(tmp2);
+        var container2 = document.getElementById("mynetwork2");
+        var data2 = {
+          nodes: nodes2
+        };
+
+        var options = {
+          clickToUse: false,
+          physics:{
+            enabled:false
+          },
+          interaction:{
+            dragNodes: false,
+            dragView: false
+          },
+          nodes:{
+            widthConstraint:
+               { minimum: 20}
+             ,
+             heightConstraint:
+                { minimum: 20}
+              ,
+              font: {
+                  size: 20 // Works when size is > 4
+              }
+          },
+
+        };
+
+        var network = new vis.Network(container1, data1, options);
+        var network = new vis.Network(container2, data2, options);
       }
     </script>
   </body>
