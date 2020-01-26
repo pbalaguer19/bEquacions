@@ -46,7 +46,7 @@ function mostraEquacio(){
 	}
 
 	// M2
-	if(m2 > 1 || m2 < -1){
+	if(m2 != 1 || m2 != -1 || m2 != 0){
 		eq = eq + m2 + "x";
 	}else{
 		if(m2 == 0){
@@ -205,7 +205,7 @@ function crearNodes(tmp, n, id, label, shape, colorPos, colorNeg, x, y, to){
 		lab = "-" + label;
 	}
 	for(var i=0; i<Math.abs(parseInt(n)); i++){
-		tmp.push({ id: id+i, label: label, shape: shape, color: color, x:x, y:y*i })
+		tmp.push({ id: id+i, label: lab, shape: shape, color: color, x:x, y:y*i })
 		if(n < 0){
 			edges.push({ from: id+i, to: to });
 		}
