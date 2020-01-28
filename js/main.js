@@ -46,7 +46,7 @@ function mostraEquacio(){
 	}
 
 	// M2
-	if(m2 != 1 || m2 != -1 || m2 != 0){
+	if(m2 != 1 && m2 != -1 && m2 != 0){
 		eq = eq + m2 + "x";
 	}else{
 		if(m2 == 0){

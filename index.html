@@ -32,10 +32,10 @@
 
     <section class="probootstrap-cover">
       <div class="container">
-        <div class="row probootstrap-vh-100 align-items-center text-center" style="padding-top: 3em;">
+        <div class="row probootstrap-vh-100 align-items-center text-center pt-5">
           <div class="col-sm">
             <div class="probootstrap-text">
-              <div class="probootstrap-subheading mb-5">
+              <div class="probootstrap-subheading mb-5 pt-5">
                 <p class="h5 font-weight-normal">Resol l'equació aplicant la mateixa operació als dos membres de l'equació.</p>
               </div>
               <div class="col-md-12">
@@ -43,8 +43,8 @@
                   <div class="row justify-content-center align-items-center">
                     <div class="col-md-2">
                       <div class="form-group">
-                        <label for="fname" style="color:white">Expressió</label>
-                        <input id="numero" type="text" class="form-control" id="fname" name="fname">
+                        <label for="fname" style="color:white">Expressió</label> <i style="color:grey" data-toggle="tooltip" title="Escriu una expressió i escull l'operació que vols aplicar als dos membres de l'equació">(?)</i>
+                        <input id="numero" type="text" class="form-control" id="fname" name="fname" placeholder="Expressió">
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -65,7 +65,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div id="mynetwork1" style="width: 1000px; height:300px"></div>
+                  <div id="mynetwork1" style="height:300px"></div>
                 </div>
                 <div class="col-md-12 mt-5">
                   <a href="#" onclick="passos();" class="btn btn-primary mr-4 mb-2">Veure passos</a>
@@ -95,5 +95,10 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
   </body>
 </html>
