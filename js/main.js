@@ -15,10 +15,10 @@ operacions = [];
 mostraEquacio();
 
 function mostraEquacio(){
-	if(n1 % 1 != 0) n1 = n1.toFixed(2)
-	if(m1 % 1 != 0) m1 = m1.toFixed(2)
-	if(n2 % 1 != 0) n2 = n2.toFixed(2)
-	if(m2 % 1 != 0) m2 = m2.toFixed(2)
+	if(n1 % 1 != 0) n1 = parseFloat(n1).toFixed(2);
+	if(m1 % 1 != 0) m1 = parseFloat(m1).toFixed(2);
+	if(n2 % 1 != 0) n2 = parseFloat(n2).toFixed(2);
+	if(m2 % 1 != 0) m2 = parseFloat(m2).toFixed(2);
 	// M1
 	if(m1 == 1){
 		eq = "x";
