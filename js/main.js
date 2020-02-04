@@ -229,16 +229,19 @@ function personalitza(){
 }
 
 function crearNodes(tmp, n, id, label, shape, colorPos, colorNeg, x, y, to){
-	color = colorPos;
-	lab = label;
+	var multip = Math.max(Math.abs(n1), Math.abs(m1), Math.abs(n2), Math.abs(m2));
+	var color = colorPos;
+	var lab = label;
 	if(n < 0){
 		color = colorNeg;
 		lab = "-" + label;
 	}
 	for(var i=0; i<Math.abs(parseInt(n)); i++){
-		tmp.push({ id: id+i, label: lab, shape: shape, color: color, x:x, y:y*i })
 		if(n < 0){
+			tmp.push({ id: id+i, label: lab, shape: shape, color: color, x:x, y:(-y*multip)+(y*i) })
 			edges.push({ from: id+i, to: to });
+		}else{
+			tmp.push({ id: id+i, label: lab, shape: shape, color: color, x:x, y:-y*i })
 		}
 	}
 
@@ -248,33 +251,35 @@ function crearNodes(tmp, n, id, label, shape, colorPos, colorNeg, x, y, to){
 			if (lab < 0) lab = "-" + Math.abs(lab).toString() + "x";
 			else lab = lab.toString() + "x";
 		}
-		tmp.push({ id: 999+id+i, label: lab.toString(), shape: shape, color: color, x:x, y:y*i })
 		if(n < 0){
 			edges.push({ from: id+i, to: to });
+			tmp.push({ id: 999+id+i, label: lab.toString(), shape: shape, color: color, x:x, y:y*i })
+		}else{
+			tmp.push({ id: 999+id+i, label: lab.toString(), shape: shape, color: color, x:x, y:-y*i })
 		}
 	}
 
 	return tmp;
 }
 
-function dibuixaBalanca(tmp, multip){
+function dibuixaBalanca(tmp){
 	// Barra esquerra
 	for(var i=0; i<8; i++){
-		tmp.push({ id: 100 + i, label: "", shape: "box", color: "#000000", x:-450+(i*20), y:(35*multip)+100 })
+		tmp.push({ id: 100 + i, label: "", shape: "box", color: "#000000", x:-450+(i*20), y:35 })
 
 	}
 	// Barra dreta
 	for(var i=0; i<8; i++){
-		tmp.push({ id: 200 + i, label: "", shape: "box", color: "#000000", x:350+(i*20), y:(35*multip)+100 })
+		tmp.push({ id: 200 + i, label: "", shape: "box", color: "#000000", x:350+(i*20), y:35 })
 
 	}
 	// Barra llarga
 	i = 0;
 	while((-450+(i*20)) < 510){
-		tmp.push({ id: 300 + i, label: "", shape: "box", color: "#000000", x:-450+(i*20), y:(35*multip)+140 })
+		tmp.push({ id: 300 + i, label: "", shape: "box", color: "#000000", x:-450+(i*20), y:80 })
 		i++;
 	}
-	tmp.push({ id: 300 + i, label: "", shape: "triangle", color: "#000000", x:0, y:(35*multip)+180 })
+	tmp.push({ id: 300 + i, label: "", shape: "triangle", color: "#000000", x:0, y:120 })
 	return tmp;
 }
 
@@ -289,8 +294,7 @@ function dibuixa(){
 	tmp = crearNodes(tmp, m2, Math.abs(n1)+Math.abs(m1), "x", "box", "#97C2FC", "#DF644E", 400, 35, 204);
 	tmp = crearNodes(tmp, n2, Math.abs(m2)+Math.abs(n1)+Math.abs(m1), "1", "ellipse", "#6E6EFD", "#902A18", 450, 35, 204);
 
-	var multip = Math.max(Math.abs(n1), Math.abs(m1), Math.abs(n2), Math.abs(m2));
-	tmp = dibuixaBalanca(tmp, multip);
+	tmp = dibuixaBalanca(tmp);
 
 	var nodes1 = new vis.DataSet(tmp);
 	var edges1 = new vis.DataSet(edges);
