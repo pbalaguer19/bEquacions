@@ -197,6 +197,37 @@ function reinicia(){
 	location.reload();
 }
 
+function personalitza(){
+	do{
+		m1 = prompt("Coeficient de la 'x' del primer membre.", "1");
+		if (m1 === null){location.reload(); return;}
+	}while(isNaN(m1));
+	m1 = parseFloat(m1);
+
+	do{
+		n1 = prompt("Terme independent del primer membre.", "1");
+		if (n1 === null){location.reload(); return;}
+	}while(isNaN(n1));
+	n1 = parseFloat(n1);
+
+	do{
+		m2 = prompt("Coeficient de la 'x' del segon membre.", "1");
+		if (m2 === null){location.reload(); return;}
+	}while(isNaN(m2));
+	m2 = parseFloat(m2);
+
+	do{
+		n2 = prompt("Terme independent del segon membre.", "1");
+		if (n2 === null){location.reload(); return;}
+	}while(isNaN(n2));
+	n2 = parseFloat(n2);
+
+	equacions = [];
+	operacions = [];
+
+	mostraEquacio();
+}
+
 function crearNodes(tmp, n, id, label, shape, colorPos, colorNeg, x, y, to){
 	color = colorPos;
 	lab = label;
