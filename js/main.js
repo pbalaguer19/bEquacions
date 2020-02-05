@@ -202,7 +202,17 @@ function passos(){
 }
 
 function reinicia(){
-	location.reload();
+	m1 = getRndInteger(-10, 10);
+	n1 = getRndInteger(-10, 10);
+	do{
+		m2 = getRndInteger(-10, 10);
+	}while(m2 == m1);
+	n2 = getRndInteger(-10, 10);
+
+	equacions = [];
+	operacions = [];
+
+	mostraEquacio();
 }
 
 function personalitza(){
