@@ -39,7 +39,11 @@ function mostraEquacio(){
 		eq = eq + " = ";
 	}else{
 		if(m1 != 0){
-			eq = eq + " + " + n1 + " = ";
+			if(n1 < 0){
+				eq = eq + " - " + Math.abs(n1) + " = ";
+			}else{
+				eq = eq + " + " + n1 + " = ";
+			}
 		}else{
 			eq = eq + n1 + " = ";
 		}
@@ -63,7 +67,11 @@ function mostraEquacio(){
 	// N2
 	if(n2 != 0){
 		if(m2 != 0){
-			eq = eq + " + " + n2;
+			if(n2 < 0){
+				eq = eq + " - " + Math.abs(n2);
+			}else{
+				eq = eq + " + " + n2;
+			}
 		}else{
 			eq = eq + n2;
 		}
